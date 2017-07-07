@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 
 export default class NewPlaylist extends React.Component {
 
@@ -24,8 +25,10 @@ export default class NewPlaylist extends React.Component {
     handleSubmit(event) {
         event.preventDefault()
         this.setState({
-            input: ''
+            input: '',
+            dirtied: false
         })
+        this.props.newplaylist(this.state.input)
     }
 
     render() {
