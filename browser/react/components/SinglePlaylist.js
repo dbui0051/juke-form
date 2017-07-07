@@ -13,6 +13,18 @@ export default class SinglePlaylist extends Component {
 
     }
 
+    componentWillReceiveProps (nextProps) {
+        const currentPlaylist = this.state.playlist.id
+        const nextPlaylist = nextProps.match.params.playlistId
+        if (currentPlaylist !== nextProps) {
+            axios.get(`/api/playlists/${nextPlaylist}`)
+            .then(res => res.data)
+            .then(newPlaylist => this.setState({
+                playlist: newPlaylist
+            }));
+        }
+    }
+
     componentDidMount() {
         const playlistId = this.props.match.params.playlistId;
 
@@ -20,7 +32,7 @@ export default class SinglePlaylist extends Component {
             .then(res => res.data)
             .then(playlist => this.setState({
                 playlist
-            }));
+        }));
     }
 
     render() {
