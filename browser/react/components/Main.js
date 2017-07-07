@@ -4,6 +4,7 @@ import StatefulAlbums from './StatefulAlbums';
 import SingleAlbum from './SingleAlbum';
 import AllArtists from './AllArtists';
 import SingleArtist from './SingleArtist';
+import SinglePlaylist from './SinglePlaylist';
 import Sidebar from './Sidebar';
 import Player from './Player';
 import NewPlaylist from './NewPlaylist';
@@ -55,6 +56,8 @@ export default class Main extends Component {
               <Route path="/artists/:artistId" component={SingleArtist} />
               <Route path="/newplaylist" render={
                 () => <NewPlaylist newplaylist={this.addPlaylist} /> } />
+
+              <Route path="/playlist/:playlistId" component={SinglePlaylist} />
               <Route component={StatefulAlbums} />
             </Switch>
           </div>

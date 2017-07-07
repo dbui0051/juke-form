@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Sidebar = (props) => {
 
-  const playLists = props.playlist
+  const playLists = props.playlist;
 
   return (
     <sidebar>
@@ -33,7 +33,7 @@ const Sidebar = (props) => {
           playLists&&playLists.map(playlist => {
             return (
               <li key={playlist.id} className="playlist-item menu-item">
-                <Link to="FILL_ME_IN">{playlist.name}</Link>
+                <Link to={`/playlist/${playlist.id}`}>{playlist.name}</Link>
               </li>
             )
           }) 
