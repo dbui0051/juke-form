@@ -6,26 +6,19 @@ export default class NewPlaylist extends React.Component {
         super()
         this.state = {
             input: '',
-            validInput: true,
-            inputFormControl: 'form-control'
+            dirtied: false
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    handleValidation() {
-        (this.state.input.length <= 16) && (this.state.input.length >= 0) ? this.setState({validInput: false}) : this.setState({validInput: true})
+    isValid() {
+        return (this.state.input.length <= 16 && this.state.input.length > 0)
     }
 
     handleChange(event) {
-        this.setState({input: event.target.value});
-        if (this.handleValidation()) {
-            this.setState({inputFormControl: 'form-control alert alert-warning'});
-        } else {
-            this.setState({inputFormControl: 'form-control'});
-        }
-
-        console.log(this.state.inputFormControl);
+        this.setState({input: event.target.value, dirtied: true})
+        this.isValid()
     }
 
     handleSubmit(event) {
@@ -45,12 +38,13 @@ export default class NewPlaylist extends React.Component {
                             <label className="col-xs-2 control-label">Name</label>
                             <div className="col-xs-10">
                                 <input value={this.state.input} onChange={this.handleChange}
-                                       className={this.state.inputFormControl} type="text"/>
+                                       className='form-control' type="text"/>
                             </div>
                         </div>
+                        {!this.isValid() && this.state.dirtied && <div className="alert alert-warning">Invalid Input</div>}
                         <div className="form-group">
                             <div className="col-xs-10 col-xs-offset-2">
-                                <button type="submit" className="btn btn-success" disabled={this.state.validInput}>
+                                <button type="submit" className="btn btn-success" disabled={!this.isValid()}>
                                     Create Playlist
                                 </button>
                             </div>
